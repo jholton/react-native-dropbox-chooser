@@ -7,8 +7,8 @@
 //
 
 #import "RNDropboxChooser.h"
-#import "RCTBridge.h"
-#import "RCTUtils.h"
+#import <React/RCTBridge.h>
+#import <React/RCTUtils.h>
 #import <DBChooser/DBChooser.h>
 
 @implementation DropboxChooser
@@ -22,12 +22,12 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(openChooser:(NSString*)linkType callback:(RCTResponseSenderBlock)callback)
 {
-  
+
   dispatch_async(dispatch_get_main_queue(), ^{
     UIViewController *controller = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
-    
+
     DBChooserLinkType DBlinkType = [linkType isEqualToString:@"DBChooserLinkTypeDirect"] ? DBChooserLinkTypeDirect : DBChooserLinkTypePreview;
-    
+
     [[DBChooser defaultChooser] openChooserForLinkType:DBlinkType
                                     fromViewController:controller completion:^(NSArray *results)
      {
@@ -40,8 +40,8 @@ RCT_EXPORT_METHOD(openChooser:(NSString*)linkType callback:(RCTResponseSenderBlo
        }
      }];
   });
-  
-  
+
+
 }
 
 @end
